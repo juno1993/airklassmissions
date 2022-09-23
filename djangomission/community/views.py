@@ -1,7 +1,8 @@
 from django.shortcuts import render
 
 # Create your views here.
-from community.crud import user_question_creator, user_question_deleter, master_klass_answer_creator
+from community.crud import user_question_creator, user_question_deleter, master_klass_answer_creator, \
+    master_question_deleter
 from community.models import Question
 from community.ser import QuestionSerializer
 from utils.api_view import UserAPIView, MasterAPIView
@@ -24,7 +25,20 @@ class UserQuestionDeleteAPI(UserAPIView, DeleteMixin):
     )
     deleter = staticmethod(user_question_deleter)
     lookup_map = {
-        'question_id': 'id'
+        'question_id': 'id',
+        'klass_id': 'klass_id'
+    }
+
+
+class MasterQuestionDeleteAPI(MasterAPIView, DeleteMixin):
+    model = Question
+    permission_classes = (
+        IsMasterKlassMine,
+    )
+    deleter = staticmethod(master_question_deleter)
+    lookup_map = {
+        'question_id': 'id',
+        'klass_id': 'klass_id'
     }
 
 

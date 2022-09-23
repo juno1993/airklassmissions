@@ -20,6 +20,11 @@ def user_question_deleter(obj):
         obj.delete()
 
 
+# 강사 질문 삭제
+def master_question_deleter(obj):
+    obj.delete()
+
+
 # 마스터 강의 답변 생성
 def master_klass_answer_creator(request, **kwargs):
     data = request.data

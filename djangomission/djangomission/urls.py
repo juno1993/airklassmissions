@@ -17,20 +17,24 @@ from django.contrib import admin
 from django.urls import path, include
 
 from accounts.views import UserLoginAPI
-from community.views import UserQuestionListCreateAPI, UserQuestionDeleteAPI, MasterKlassAnswerCreateAPI
+from community.views import UserQuestionListCreateAPI, UserQuestionDeleteAPI, MasterKlassAnswerCreateAPI, \
+    MasterQuestionDeleteAPI
 from contentshub.views import MasterKlassListCreateAPI
 
 urlpatterns = [
     path('admin/', admin.site.urls),
 
+    # 강사
     path('master/', include([
         path('klass', MasterKlassListCreateAPI.as_view()),
+        path('klass/<int:klass_id>/question/<int:question_id>', MasterQuestionDeleteAPI.as_view()),
         path('question/<int:question_id>/answer', MasterKlassAnswerCreateAPI.as_view())
     ])),
 
+    # 유저
     path('user/', include([
         path('login', UserLoginAPI.as_view()),
         path('klass/<int:klass_id>/question', UserQuestionListCreateAPI.as_view()),
-        path('klass/<int:klass_id>/question/<question_id>', UserQuestionDeleteAPI.as_view())
+        path('klass/<int:klass_id>/question/<int:question_id>', UserQuestionDeleteAPI.as_view())
     ]))
 ]
