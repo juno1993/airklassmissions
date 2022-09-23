@@ -44,7 +44,7 @@
         ○ 모든 사용자는 특정 강의에 작성된 질문과 답변을 확인할 수 있습니다.
 
 ##### 추가된 기능
-    utils package
+    1. utils package
     > custom_exception 추가
     > custom api_view 추가
     > permission 추가
