@@ -1,34 +1,35 @@
 # airklassmissions
 
-#####프로젝트 다운로드
+##### 프로젝트 다운로드
     git clone 프로젝트명
     
-#####환경변수
-    DJANGO_SETTINGS_MODULE=djangomission.settings
+##### 설치
+    pip install --upgrade pip
+    pip install -r djangomission/requirements.txt
     
-#####가상환경
-    Python 3.7
+##### 환경변수
+    DJANGO_SETTINGS_MODULE=djangomission.settings
 
-#####마이그레이션 (윈도우)
+##### 마이그레이션 (윈도우)
     1. makemigrations.bat 실행
     2. migrate.bat 실행
 
-#####마이그레이션 (mac)
+##### 마이그레이션 (mac)
     1. makemigrations.sh 실행
     2. migrate.sh 실행
 
-#####command 실행 (윈도우) 유저 생성
+##### command 실행 (윈도우) 유저 생성
     set DJANGO_SETTINGS_MODULE=djangomission.settings
     python djangomission/manage.py create_user
 
-#####command 실행 (mac) 유저 생성
+##### command 실행 (mac) 유저 생성
     export DJANGO_SETTINGS_MODULE=djangomission.settings
     ./djangomission/manage.py create_user    
     
-#####POSTMAN을 이용한 API 테스트
+##### POSTMAN을 이용한 API 테스트
     해당 파일은 메일로 첨부
     
-#####요구사항
+##### 요구사항
     ● 수강생, 강사, 강의, 질문, 답변 모델간의 관계를 구현 해야 합니다.
     ● 강의 생성 기능
         ○ 강의는 강사만 생성이 가능해야 합니다.
