@@ -25,15 +25,15 @@ urlpatterns = [
     path('admin/', admin.site.urls),
 
     # 강사
-    path('master/', include([
+    path('master/<int:master_id>/', include([
         path('klass', MasterKlassListCreateAPI.as_view()),
         path('klass/<int:klass_id>/question/<int:question_id>', MasterQuestionDeleteAPI.as_view()),
         path('question/<int:question_id>/answer', MasterKlassAnswerCreateAPI.as_view())
     ])),
 
     # 유저
-    path('user/', include([
-        path('login', UserLoginAPI.as_view()),
+    path('user/login', UserLoginAPI.as_view()),
+    path('user/<int:user_id>/', include([
         path('klass/<int:klass_id>/question', UserQuestionListCreateAPI.as_view()),
         path('klass/<int:klass_id>/question/<int:question_id>', UserQuestionDeleteAPI.as_view())
     ]))

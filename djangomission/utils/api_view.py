@@ -3,6 +3,7 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 
 from utils.authentication import MasterAuthentication, UserAuthentication
+from utils.permission import IsMatchedMasterId, IsMatchedUserId
 from utils.query_helper import get_object_or_404
 
 
@@ -55,6 +56,7 @@ class MasterAPIView(CustomAPIView):
         )
         self.permission_classes += (
             permissions.IsAuthenticated,
+            IsMatchedMasterId,
         )
         super().__init__(*args, **kwargs)
 
@@ -67,5 +69,6 @@ class UserAPIView(CustomAPIView):
         )
         self.permission_classes += (
             permissions.IsAuthenticated,
+            IsMatchedUserId,
         )
         super().__init__(*args, **kwargs)

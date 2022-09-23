@@ -7,7 +7,7 @@ from community.models import Question
 from community.ser import QuestionSerializer
 from utils.api_view import UserAPIView, MasterAPIView
 from utils.mixin import CreateMixin, DeleteMixin, ListMixin
-from utils.permission import IsQuestionMine, IsMasterKlassMine
+from utils.permission import IsQuestionMine, IsMasterQuestionMine
 
 
 # 유저 강의 질문 조회, 생성
@@ -34,7 +34,7 @@ class UserQuestionDeleteAPI(UserAPIView, DeleteMixin):
 class MasterQuestionDeleteAPI(MasterAPIView, DeleteMixin):
     model = Question
     permission_classes = (
-        IsMasterKlassMine,
+        IsMasterQuestionMine,
     )
     deleter = staticmethod(master_question_deleter)
     lookup_map = {
@@ -46,6 +46,6 @@ class MasterQuestionDeleteAPI(MasterAPIView, DeleteMixin):
 # 마스터 강의 답변 생성
 class MasterKlassAnswerCreateAPI(MasterAPIView, CreateMixin):
     permission_classes = (
-        IsMasterKlassMine,
+        IsMasterQuestionMine,
     )
     creator = staticmethod(master_klass_answer_creator)
