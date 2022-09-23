@@ -30,6 +30,7 @@ class UserQuestionDeleteAPI(UserAPIView, DeleteMixin):
     }
 
 
+# 마스터 질문 삭제
 class MasterQuestionDeleteAPI(MasterAPIView, DeleteMixin):
     model = Question
     permission_classes = (

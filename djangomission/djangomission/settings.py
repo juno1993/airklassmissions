@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'contentshub',
     'community',
     'django_extensions',
+    'commands'
 ]
 
 MIDDLEWARE = [
