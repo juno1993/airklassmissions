@@ -22,7 +22,10 @@ def user_question_deleter(obj):
 
 # 강사 질문 삭제
 def master_question_deleter(obj):
-    obj.delete()
+    if not obj.community_answer.exists():
+        obj.delete()
+    else:
+        raise ForbiddenException('답변이 달린 질문은 삭제가 불가능 합니다.')
 
 
 # 마스터 강의 답변 생성

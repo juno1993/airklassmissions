@@ -17,6 +17,7 @@ class CustomAPIView(APIView):
     lookup_map = {}
 
     authentication_classes = ()
+    permission_classes = ()
 
     @staticmethod
     def success(detail='success', **kwargs):
@@ -54,10 +55,10 @@ class MasterAPIView(CustomAPIView):
         self.authentication_classes += (
             MasterAuthentication,
         )
-        self.permission_classes += (
+        self.permission_classes = (
             permissions.IsAuthenticated,
             IsMatchedMasterId,
-        )
+        ) + self.permission_classes
         super().__init__(*args, **kwargs)
 
 
@@ -67,8 +68,8 @@ class UserAPIView(CustomAPIView):
         self.authentication_classes += (
             UserAuthentication,
         )
-        self.permission_classes += (
+        self.permission_classes = (
             permissions.IsAuthenticated,
             IsMatchedUserId,
-        )
+        ) + self.permission_classes
         super().__init__(*args, **kwargs)

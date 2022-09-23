@@ -19,6 +19,9 @@ class MasterAuthentication(TokenAuthentication):
 
 
 class UserAuthentication(TokenAuthentication):
+    """
+    유저 토큰 인증
+    """
     def authenticate_credentials(self, key):
         model = CustomUserToken
         try:

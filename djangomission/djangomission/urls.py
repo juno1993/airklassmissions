@@ -16,13 +16,14 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 
-from accounts.views import UserLoginAPI
-from community.views import UserQuestionListCreateAPI, UserQuestionDeleteAPI, MasterKlassAnswerCreateAPI, \
-    MasterQuestionDeleteAPI
-from contentshub.views import MasterKlassListCreateAPI
+from accounts.views import *
+from community.views import *
+from contentshub.views import *
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+
+    path('klass', KlassListAPI.as_view()),      # 전체 강의 목록
 
     # 강사
     path('master/<int:master_id>/', include([

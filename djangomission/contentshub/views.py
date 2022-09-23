@@ -8,6 +8,11 @@ from utils.api_view import MasterAPIView
 from utils.mixin import ListMixin, CreateMixin
 
 
+class KlassListAPI(ListMixin):
+    queryset = Klass.objects.all()
+    serializer_class = KlassSerializer
+
+
 # 마스터 강의 목록, 개설
 class MasterKlassListCreateAPI(MasterAPIView, ListMixin, CreateMixin):
     queryset = Klass.objects.all()

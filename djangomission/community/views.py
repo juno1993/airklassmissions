@@ -15,6 +15,9 @@ class UserQuestionListCreateAPI(UserAPIView, ListMixin, CreateMixin):
     queryset = Question.objects.all()
     creator = staticmethod(user_question_creator)
     serializer_class = QuestionSerializer
+    lookup_map = {
+        'klass_id': 'klass_id'
+    }
 
 
 # 유저 강의 질문 삭제
