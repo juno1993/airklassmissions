@@ -7,10 +7,10 @@ class ListMixin(CustomAPIView):
 
 
 class CreateMixin(CustomAPIView):
-    def get(self, request, **kwargs):
-        return self.creator(request, **kwargs)
+    def post(self, request, **kwargs):
+        return self.create(request, **kwargs)
 
 
 class DeleteMixin(CustomAPIView):
-    def get(self, request, **kwargs):
-        return self.deleter(request, **kwargs)
+    def deleter(self, request, **kwargs):
+        return self.delete(request, **kwargs)

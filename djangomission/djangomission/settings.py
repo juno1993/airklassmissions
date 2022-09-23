@@ -71,6 +71,11 @@ TEMPLATES = [
     },
 ]
 
+REST_FRAMEWORK = {
+    'EXCEPTION_HANDLER': 'utils.custom_exception.custom_exception_handler',
+    'DATETIME_FORMAT': '%Y-%m-%d %H:%M',
+}
+
 WSGI_APPLICATION = 'djangomission.wsgi.application'
 
 

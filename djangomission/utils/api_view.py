@@ -1,7 +1,9 @@
+from rest_framework import permissions
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
-from utils.query_helper import get_object_or_None
+from utils.authentication import MasterAuthentication, UserAuthentication
+from utils.query_helper import get_object_or_404
 
 
 class CustomAPIView(APIView):
@@ -13,6 +15,8 @@ class CustomAPIView(APIView):
     model = None
     lookup_map = {}
 
+    authentication_classes = ()
+
     @staticmethod
     def success(detail='success', **kwargs):
         return Response({'detail': detail, **kwargs})
@@ -23,7 +27,7 @@ class CustomAPIView(APIView):
 
     def get_object(self, request, **kwargs):
         query_dict = {val: kwargs.get(key) for key, val in self.lookup_map.items()}
-        obj = get_object_or_None(self.model, **query_dict)
+        obj = get_object_or_404(self.model, **query_dict)
         return obj
 
     def list(self, request, **kwargs):
@@ -33,11 +37,35 @@ class CustomAPIView(APIView):
         ser = self.serializer_class(instance=queryset, many=True)
         return self.response(ser.data)
 
-    def creator(self, request, **kwargs):
+    def create(self, request, **kwargs):
         result = self.creator(request, **kwargs)
         return self.response(result) if result else self.success()
 
-    def deleter(self, request, **kwargs):
+    def delete(self, request, **kwargs):
         obj = self.get_object(request, **kwargs)
         result = self.deleter(obj)
         return self.response(result) if result else self.success()
+
+
+# 마스터 권한 체크
+class MasterAPIView(CustomAPIView):
+    def __init__(self, *args, **kwargs):
+        self.authentication_classes += (
+            MasterAuthentication,
+        )
+        self.permission_classes += (
+            permissions.IsAuthenticated,
+        )
+        super().__init__(*args, **kwargs)
+
+
+# 유저 권한 체크
+class UserAPIView(CustomAPIView):
+    def __init__(self, *args, **kwargs):
+        self.authentication_classes += (
+            UserAuthentication,
+        )
+        self.permission_classes += (
+            permissions.IsAuthenticated,
+        )
+        super().__init__(*args, **kwargs)
