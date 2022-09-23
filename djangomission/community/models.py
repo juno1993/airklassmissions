@@ -6,8 +6,14 @@ class Question(models.Model):
     klass = models.ForeignKey('contentshub.Klass', on_delete=models.CASCADE, null=True, related_name='community_question')
     contents = models.TextField()
 
+    class Meta:
+        ordering = ('-id',)
+
 
 class Answer(models.Model):
     master = models.ForeignKey('contentshub.Master', on_delete=models.CASCADE, null=True, related_name='community_answer')
     question = models.ForeignKey('community.Question', on_delete=models.CASCADE, null=True, related_name='community_answer')
     contents = models.TextField()
+
+    class Meta:
+        ordering = ('-id',)
